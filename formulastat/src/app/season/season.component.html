@@ -1,0 +1,12 @@
+<div *ngIf="loading"><h2>Loading...</h2></div>
+<div *ngIf="!loading">
+  {{champDriver.driverId}}
+  {{champConstructor.constructorId}}
+  {{racesLength}}
+  <li *ngFor="let year of years">
+    {{year.season}}
+  </li>
+
+</div>
+
+
