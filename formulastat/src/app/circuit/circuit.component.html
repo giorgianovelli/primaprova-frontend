@@ -1,0 +1,23 @@
+<p>circuit works!</p>
+<div *ngIf="loading"><h2>Loading...</h2></div>
+<div *ngIf="!loading">
+  <div>
+    <form name="circuitForm">
+      <label>Select circuit</label><br>
+      <select (change)="selectChangeHandler($event)">
+        <option *ngFor="let circuit of circuits">{{circuit.circuitId}}</option>
+      </select>
+    </form>
+  </div>
+
+  {{circuit.circuitName}}
+  {{circuit.circuitId}}
+  {{circuit.location.country}}
+
+  <li *ngFor="let driver of podium">
+    {{driver.driverId}}
+  </li>
+
+
+</div>
+

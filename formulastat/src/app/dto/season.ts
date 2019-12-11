@@ -1,3 +1,4 @@
 export interface Season {
-  season: number;
+  season: string;
+  url: string;
 }

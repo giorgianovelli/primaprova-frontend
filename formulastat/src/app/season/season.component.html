@@ -1,11 +1,20 @@
 <div *ngIf="loading"><h2>Loading...</h2></div>
 <div *ngIf="!loading">
+  <div>
+    <form name="yearForm">
+      <label>Select year</label><br>
+      <select (change)="selectChangeHandler($event)">
+        <option *ngFor="let year of years">{{year.season}}</option>
+      </select>
+    </form>
+  </div>
   {{champDriver.driverId}}
   {{champConstructor.constructorId}}
   {{racesLength}}
-  <li *ngFor="let year of years">
+
+  <!--<li *ngFor="let year of years">
     {{year.season}}
-  </li>
+  </li>-->
 
 </div>
 

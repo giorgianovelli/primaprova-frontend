@@ -1,9 +1,9 @@
 import {Location} from './location';
 
 export interface Circuit {
-  location: Location;
   circuitId: string;
-  circuitName: string;
   url: string;
+  circuitName: string;
+  location: Location;
 
 }
