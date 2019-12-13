@@ -19,30 +19,40 @@ export class SeasonComponent implements OnInit {
   champConstructor: Constructor;
   races: Race[] = [];
   racesLength: number;
-  selectedYear: string;
   loading = true;
   constructor(private formulaService: FormulastatService) { }
 
   ngOnInit() {
+    this.refreshSeasons()
+      .subscribe();
+  }
+
+  /**
+   * refresh search by selected year
+   * @param year, selected year {string}
+   */
+  refresh(year: string) {
     this.loading = true;
     merge(
-      this.refreshSeasons(),
-      this.refreshYearChamp('1990'),
-      this.refreshYearConstructor('1990'),
-      this.refreshNumberOfRace('1990')
+      this.refreshYearChamp(year),
+      this.refreshYearConstructor(year),
+      this.refreshNumberOfRace(year)
     ).pipe(
       finalize(() => this.loading = false)
     ).subscribe();
   }
+  /**
+   * handle event from select list
+   * @param event - event change from select
+   */
   selectChangeHandler(event: any) {
-    // this.selectedYear = event.target.value;
-    merge(
-      this.refreshYearChamp(event.target.value),
-      this.refreshYearConstructor(event.target.value),
-      this.refreshNumberOfRace(event.target.value)
-    ).subscribe();
-    console.log(event.target.value);
+    this.refresh(event.target.value);
   }
+
+  /**
+   * get list of seasons from formulaService
+   * @returns list of seasons {Observable<Season>}
+   */
   refreshSeasons(): Observable<Season> {
     return this.formulaService.getSeasons()
       .pipe(
@@ -51,6 +61,12 @@ export class SeasonComponent implements OnInit {
         tap(seasons => this.years = seasons)
       );
   }
+
+  /**
+   * get driver world champion for selected year from formulaService
+   * @param year, selected year {string}
+   * @returns world champion driver {Observable<Driver>}
+   */
   refreshYearChamp(year: string): Observable<Driver> {
     return this.formulaService.getYearChamp(year)
       .pipe(
@@ -59,6 +75,12 @@ export class SeasonComponent implements OnInit {
         tap(driver => this.champDriver = driver)
       );
   }
+
+  /**
+   * get constructor world champion for selected year from formulaService
+   * @param year, selected year {string}
+   * @returns world champion constructor {Observable<Constructor>}
+   */
   refreshYearConstructor(year: string): Observable<Constructor> {
     return this.formulaService.getYearConstructor(year)
       .pipe(
@@ -67,6 +89,12 @@ export class SeasonComponent implements OnInit {
         tap(constructor => this.champConstructor = constructor)
       );
   }
+
+  /**
+   * get number of race for selected year from formulaService
+   * @param year, selected year {string}
+   * @returns all season races{Observable<Race>}
+   */
   refreshNumberOfRace(year: string): Observable<Race> {
     return this.formulaService.getNumberOfRace(year)
       .pipe(

@@ -4,12 +4,7 @@ import {SeasonComponent} from './season/season.component';
 import {CircuitComponent} from './circuit/circuit.component';
 
 
-const routes: Routes = [
-  {
-    path: '',
-    component: CircuitComponent
-  }
-];
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

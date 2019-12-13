@@ -6,6 +6,8 @@ import {Driver} from './dto/driver';
 import {Constructor} from './dto/constructor';
 import {Race} from './dto/race';
 import {Circuit} from './dto/circuit';
+import {Raceresult} from './dto/raceresult';
+import {Championship} from './dto/championship';
 
 
 @Injectable({
@@ -16,11 +18,11 @@ export class FormulastatService {
 
   constructor(private http: HttpClient) { }
 
+  // ricerca per stagione
   getSeasons(): Observable<Season[]> {
     return this.http.get<Season[]>(`${this.formulaUrl}/seasons.json?limit=30&offset=40`);
 
   }
-  // ricerca per stagione
   getYearChamp(year: string): Observable<Driver> {
     return this.http.get<Driver>(`${this.formulaUrl}/${year}/driverStandings/1.json`);
   }
@@ -41,12 +43,30 @@ export class FormulastatService {
   getLastSeasonResult(circuitid: string, position: number): Observable<Driver> {
     return this.http.get<Driver>(`${this.formulaUrl}/current/circuits/${circuitid}/results/${position}.json`);
   }
-  getWinnerDriverByCircuit(circuitid: string): Observable<any> { // TODO simile a quella sopra
-    return this.http.get(`${this.formulaUrl}/circuits/${circuitid}/results/1.json`);
+  getWinnerDriverByCircuit(circuitid: string): Observable<Raceresult> { // TODO simile a quella sopra
+    return this.http.get<Raceresult>(`${this.formulaUrl}/circuits/${circuitid}/results/1.json?limit=100`);
   }
   /*getFastestLapTime(circuitid: string): Observable<any> { //TODO
     return this.http.get(`${this.formulaUrl}/fastest/1/circuits/${circuitid}.json`);
   }*/
+
+  // ricerca per pilota
+  getDrivers(): Observable<Driver> {
+    return this.http.get<Driver>(`${this.formulaUrl}/current/drivers.json`);
+  }
+  getDriverInfo(driverId: string): Observable<Driver> {
+    return this.http.get<Driver>(`${this.formulaUrl}/drivers/${driverId}.json`);
+  }
+  getPodiumResult(driverId: string, position: number): Observable<any> {
+    return this.http.get<Raceresult>(`${this.formulaUrl}/drivers/${driverId}/results/${position}.json?limit=100`);
+  }
+  getWorldChampion(driverId: string): Observable<Championship> {
+    return this.http.get<Championship>(`${this.formulaUrl}/drivers/${driverId}/driverStandings/1.json`);
+  }
+  getRacingSeasons(driverId: string): Observable<Season> {
+    return this.http.get<Season>(`${this.formulaUrl}/drivers/${driverId}/seasons.json`);
+  }
+
 
 }
 

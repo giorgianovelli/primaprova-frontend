@@ -1,20 +1,24 @@
 <div *ngIf="loading"><h2>Loading...</h2></div>
-<div *ngIf="!loading">
+<div>
   <div>
     <form name="yearForm">
       <label>Select year</label><br>
       <select (change)="selectChangeHandler($event)">
+        <option value="" selected disabled hidden>Select</option>
         <option *ngFor="let year of years">{{year.season}}</option>
       </select>
     </form>
   </div>
-  {{champDriver.driverId}}
-  {{champConstructor.constructorId}}
-  {{racesLength}}
 
-  <!--<li *ngFor="let year of years">
-    {{year.season}}
-  </li>-->
+  <ng-container  *ngIf="!loading">
+    <h3>World champion</h3>
+    <h5>Driver:</h5>
+    {{champDriver.driverId}}
+    <h5>Constructor:</h5>
+    {{champConstructor.constructorId}}
+    <h3>Number of races</h3>
+    {{racesLength}}
+  </ng-container>
 
 </div>
 

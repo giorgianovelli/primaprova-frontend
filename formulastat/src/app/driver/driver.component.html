@@ -1,0 +1,35 @@
+<p>driver works!</p>
+<div *ngIf="loading"><h2>Loading...</h2></div>
+<div>
+  <div>
+    <form name="circuitForm">
+      <label>Select driver</label><br>
+      <select (change)="selectChangeHandler($event);">
+        <option value="" selected disabled hidden>Select</option>
+        <option *ngFor="let driver of driversList">{{driver.driverId}}</option>
+      </select>
+    </form>
+  </div>
+
+  <ng-container  *ngIf="!loading">
+    {{driver.givenName}}
+    {{driver.familyName}}
+    {{driver.dateOfBirth}}
+    {{driver.nationality}}
+
+    <li *ngFor="let pos of podium">
+      {{pos}}
+    </li>
+
+    <h4>World Championship</h4>
+    <li *ngFor="let champ of championship">
+      {{champ.season}}
+    </li>
+
+    <h4>Stagioni disputate</h4>
+    <li *ngFor="let year of seasons">
+      {{year.season}}
+    </li>
+  </ng-container>
+
+</div>

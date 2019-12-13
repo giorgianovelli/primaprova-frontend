@@ -1,23 +1,37 @@
-<p>circuit works!</p>
 <div *ngIf="loading"><h2>Loading...</h2></div>
-<div *ngIf="!loading">
+<div>
   <div>
     <form name="circuitForm">
       <label>Select circuit</label><br>
-      <select (change)="selectChangeHandler($event)">
+      <select (change)="selectChangeHandler($event);">
+        <option value="" selected disabled hidden>Select</option>
         <option *ngFor="let circuit of circuits">{{circuit.circuitId}}</option>
       </select>
     </form>
   </div>
-
+<ng-container *ngIf="!loading">
+  <h4>Circuit info</h4>
   {{circuit.circuitName}}
   {{circuit.circuitId}}
-  {{circuit.location.country}}
+  {{circuit.Location.country}}
 
+  <h4>Last Podium</h4>
   <li *ngFor="let driver of podium">
     {{driver.driverId}}
   </li>
 
+  <!--<li *ngFor="let winner of winnersForCircuit">
+    {{winner.season}}
+  </li>-->
 
+  <h4>constructors - number of victories</h4>
+  <li *ngFor="let constructor of constructors">
+    {{constructor}}
+  </li>
+  <h4>drivers - number of victories</h4>
+  <li *ngFor="let driver of drivers">
+    {{driver}}
+  </li>
+</ng-container>
 </div>
 

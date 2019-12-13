@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {FormsModule} from '@angular/forms';
 import { TestComponent } from './test/test.component';
 import { CircuitComponent } from './circuit/circuit.component';
+import { DriverComponent } from './driver/driver.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CircuitComponent } from './circuit/circuit.component';
     SeasonComponent,
     DashboardComponent,
     TestComponent,
-    CircuitComponent
+    CircuitComponent,
+    DriverComponent
   ],
   imports: [
     BrowserModule,
