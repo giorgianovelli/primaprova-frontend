@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {finalize, map, switchMap, tap, toArray} from 'rxjs/operators';
 import {concat, from, merge, Observable} from 'rxjs';
 
-import {FormulastatService} from '../formulastat.service';
-import {Driver} from '../dto/driver';
-import {Raceresult} from '../dto/raceresult';
-import {Circuit} from '../dto/circuit';
+import {FormulastatService} from '../../api/formulastat.service';
+import {Driver} from '../../dto/driver';
+import {Raceresult} from '../../dto/raceresult';
+import {Circuit} from '../../dto/circuit';
 
 
 

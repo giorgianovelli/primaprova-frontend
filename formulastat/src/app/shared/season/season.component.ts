@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormulastatService} from '../formulastat.service';
+import {FormulastatService} from '../../api/formulastat.service';
 import {finalize, map, tap} from 'rxjs/operators';
 
-import {Season} from '../dto/season';
-import {Driver} from '../dto/driver';
-import {Constructor} from '../dto/constructor';
+import {Season} from '../../dto/season';
+import {Driver} from '../../dto/driver';
+import {Constructor} from '../../dto/constructor';
 import {merge, Observable} from 'rxjs';
-import {Race} from '../dto/race';
+import {Race} from '../../dto/race';
 
 @Component({
   selector: 'app-season',

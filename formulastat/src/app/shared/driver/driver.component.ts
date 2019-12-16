@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormulastatService} from '../formulastat.service';
+import {FormulastatService} from '../../api/formulastat.service';
 import {concat, merge} from 'rxjs';
 import {finalize, map, tap} from 'rxjs/operators';
-import {Driver} from '../dto/driver';
-import {Championship} from '../dto/championship';
-import {Season} from '../dto/season';
+import {Driver} from '../../dto/driver';
+import {Championship} from '../../dto/championship';
+import {Season} from '../../dto/season';
 
 @Component({
   selector: 'app-driver',

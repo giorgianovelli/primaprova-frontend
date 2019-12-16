@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Season} from './dto/season';
-import {Driver} from './dto/driver';
-import {Constructor} from './dto/constructor';
-import {Race} from './dto/race';
-import {Circuit} from './dto/circuit';
-import {Raceresult} from './dto/raceresult';
-import {Championship} from './dto/championship';
+import {Season} from '../dto/season';
+import {Driver} from '../dto/driver';
+import {Constructor} from '../dto/constructor';
+import {Race} from '../dto/race';
+import {Circuit} from '../dto/circuit';
+import {Raceresult} from '../dto/raceresult';
+import {Championship} from '../dto/championship';
 
 
 @Injectable({
@@ -65,6 +65,11 @@ export class FormulastatService {
   }
   getRacingSeasons(driverId: string): Observable<Season> {
     return this.http.get<Season>(`${this.formulaUrl}/drivers/${driverId}/seasons.json`);
+  }
+
+  // live panel
+  getLastDriverStanding() {
+    return this.http.get(`${this.formulaUrl}/current/driverStandings.json`);
   }
 
 

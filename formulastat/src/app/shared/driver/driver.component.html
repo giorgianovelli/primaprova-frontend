@@ -3,7 +3,8 @@
 <div>
   <div>
     <form name="circuitForm">
-      <label>Select driver</label><br>
+      <label>
+        <i class="fa fa-cogs"></i> Select driver</label><br>
       <select (change)="selectChangeHandler($event);">
         <option value="" selected disabled hidden>Select</option>
         <option *ngFor="let driver of driversList">{{driver.driverId}}</option>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormulastatService} from '../api/formulastat.service';
 
 @Component({
   selector: 'app-test',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formulaService: FormulastatService) { }
 
   ngOnInit() {
+    this.getLastDriverStanding();
+  }
+
+  getLastDriverStanding() {
+    this.formulaService.getLastDriverStanding()
+      .subscribe(console.log);
   }
 
 }
