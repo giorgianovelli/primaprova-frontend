@@ -21,6 +21,7 @@ export class CircuitComponent implements OnInit {
   winnersForCircuit: Raceresult[] = [];
   drivers = [];
   constructors = [];
+
   loading = true;
 
   constructor(private formulaService: FormulastatService) { }

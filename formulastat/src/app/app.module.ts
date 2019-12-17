@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import {LayoutModule} from './layouts/layout.module';
+import { TableComponent } from './shared/table/table.component';
 
 
 @NgModule({

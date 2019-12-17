@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import {CircuitComponent} from './circuit/circuit.component';
 import {DriverComponent} from './driver/driver.component';
 import {SeasonComponent} from './season/season.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {SeasonComponent} from './season/season.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    SharedModule
   ]
 })
 export class DashboardModule { }

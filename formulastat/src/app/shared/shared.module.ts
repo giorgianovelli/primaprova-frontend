@@ -3,26 +3,30 @@ import { CommonModule } from '@angular/common';
 import {LivebarComponent} from './livebar/livebar.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
-import {MatButtonModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatSidenavModule, MatTableModule, MatToolbarModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
+import {TableComponent} from './table/table.component';
 
 
 @NgModule({
   declarations: [
     LivebarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    TableComponent
   ],
   exports: [
     LivebarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    TableComponent
   ],
   imports: [
     RouterModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
+    MatTableModule,
     CommonModule
   ]
 })
