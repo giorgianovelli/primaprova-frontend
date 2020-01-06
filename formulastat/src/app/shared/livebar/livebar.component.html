@@ -1,6 +1,20 @@
+<div *ngIf="loading"><h2>Loading...</h2></div>
 
 <mat-sidenav-container>
-  <mat-sidenav [opened]="true" mode="side">Sidenav</mat-sidenav>
+  <mat-sidenav [opened]="true" mode="side">
+    <mat-toolbar>LIVE</mat-toolbar>
+    <div *ngIf="!loading">
+
+    <h4>2019 Driver Standing</h4>
+    <app-table [data]="livebarStanding"></app-table>
+
+    <h4>Last podium</h4>
+    <div *ngFor="let driver of podium">
+      {{driver.Driver.familyName}}
+    </div>
+    </div>
+
+  </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

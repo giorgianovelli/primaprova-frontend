@@ -3,11 +3,17 @@ mat-sidenav-container{
 }
 
 mat-sidenav{
-  padding: 16px;
+  padding: 10px;
+  background: lightgray;
+  width: 20%;
 }
 
-mat-sidenav{
-  background: lightcoral;
-  width: 200px;
+mat-toolbar{
+  background: #e10600;
+  color: white;
 }
 
+mat-sidenav-content{
+  padding: 25px;
+  border-bottom: 25px;
+}

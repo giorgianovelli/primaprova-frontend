@@ -1,15 +1,13 @@
-<mat-table [dataSource]="dataSource">
-  <ng-container matColumnDef="list">
-    <mat-header-cell matHeaderCellDef="name"></mat-header-cell>
-    <mat-cell *matCellDef="let list">{{list}}</mat-cell>
-  </ng-container>
+<table>
+  <thead>
+  <tr>
+    <th *ngFor="let column of columns">{{column}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let d of data">
+    <td *ngFor="let column of columns">{{d[column]}}</td>
+  </tr>
+  </tbody>
+</table>
 
-  <ng-container>
-    <mat-header-cell matHeaderCellDef="victories"></mat-header-cell>
-    <mat-cell *matCellDef="let list">{{list}}</mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: tableColumns;"></mat-row>
-
-</mat-table>

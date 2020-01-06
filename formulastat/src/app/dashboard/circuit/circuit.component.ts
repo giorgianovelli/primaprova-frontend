@@ -6,6 +6,7 @@ import {FormulastatService} from '../../api/formulastat.service';
 import {Driver} from '../../dto/driver';
 import {Raceresult} from '../../dto/raceresult';
 import {Circuit} from '../../dto/circuit';
+import {Winmap} from '../../dto/winmap';
 
 
 
@@ -19,9 +20,8 @@ export class CircuitComponent implements OnInit {
   circuit: Circuit;
   podium: Driver[] = [];
   winnersForCircuit: Raceresult[] = [];
-  drivers = [];
-  constructors = [];
-
+  drivers: Winmap[] = [];
+  constructors: Winmap[] = [];
   loading = true;
 
   constructor(private formulaService: FormulastatService) { }
@@ -63,8 +63,13 @@ export class CircuitComponent implements OnInit {
    */
   createtab(firstTab) {
     const tab = firstTab.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
-    const mapAsc = ([...tab.entries()].sort((a, b) => b[1] - a[1]));
-    return mapAsc;
+    // const mapAsc = ([...tab.entries()].sort((a, b) => b[1] - a[1]))
+    const mapAsc = new Map([...tab.entries()].sort((a, b) => b[1] - a[1]));
+    const returnTab: Winmap[] = [];
+    mapAsc.forEach((val, key) => {
+      returnTab.push({name: key, number: val});
+    });
+    return returnTab;
   }
 
   /**
@@ -77,7 +82,7 @@ export class CircuitComponent implements OnInit {
       .forEach(result => result.Results
         .forEach(resultInto => drivers.push(resultInto.Driver)));
     const driverId = drivers.map(d => d.driverId);
-    this.drivers = this.createtab(driverId);
+    this.drivers = this.createtab(driverId).slice(0, 3);
     console.log(this.drivers);
   }
 
@@ -92,7 +97,7 @@ export class CircuitComponent implements OnInit {
         .forEach(resultInto => constructors.push(resultInto.Constructor))
       );
     const consId = constructors.map(cons => cons.name);
-    this.constructors = this.createtab(consId);
+    this.constructors = this.createtab(consId).slice(0, 3);
     console.log(this.constructors);
   }
 

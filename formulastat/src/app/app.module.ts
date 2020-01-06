@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import {LayoutModule} from './layouts/layout.module';
 import { TableComponent } from './shared/table/table.component';
+import {SharedModule} from './shared/shared.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TableComponent } from './shared/table/table.component';
     LayoutModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

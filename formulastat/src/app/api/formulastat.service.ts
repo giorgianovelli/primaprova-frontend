@@ -8,6 +8,9 @@ import {Race} from '../dto/race';
 import {Circuit} from '../dto/circuit';
 import {Raceresult} from '../dto/raceresult';
 import {Championship} from '../dto/championship';
+import {Standing} from '../dto/standing';
+import {Qualiresults} from '../dto/qualiresults';
+import {map, tap} from 'rxjs/operators';
 
 
 @Injectable({
@@ -31,6 +34,9 @@ export class FormulastatService {
   }
   getNumberOfRace(year: string): Observable<Race> {
     return this.http.get<Race>(`${this.formulaUrl}/${year}.json`);
+  }
+  getPolePosition(year: string): Observable<Qualiresults> {
+    return this.http.get<Qualiresults>(`${this.formulaUrl}/${year}/grid/1/qualifying.json`);
   }
 
   // ricerca per circuito
@@ -68,8 +74,11 @@ export class FormulastatService {
   }
 
   // live panel
-  getLastDriverStanding() {
-    return this.http.get(`${this.formulaUrl}/current/driverStandings.json`);
+  getLastDriverStanding(): Observable<Standing> {
+    return this.http.get<Standing>(`${this.formulaUrl}/current/driverStandings.json?limit=3`);
+  }
+  getLastSeasonPodium() {
+    return this.http.get(`${this.formulaUrl}/current/last/results.json?limit=3`);
   }
 
 

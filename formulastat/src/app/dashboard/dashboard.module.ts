@@ -7,7 +7,6 @@ import {DriverComponent} from './driver/driver.component';
 import {SeasonComponent} from './season/season.component';
 import {SharedModule} from '../shared/shared.module';
 
-
 @NgModule({
   declarations: [
     CircuitComponent,

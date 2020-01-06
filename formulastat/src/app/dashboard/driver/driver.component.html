@@ -1,35 +1,33 @@
-<div *ngIf="loading"><h2>Loading...</h2></div>
-<div>
+<div id="container">
+  <div *ngIf="loading"><h2>Loading...</h2></div>
   <div>
-    <form name="circuitForm">
-      <label>
-        <i class="fa fa-cogs"></i> Select driver</label><br>
-      <select (change)="selectChangeHandler($event);">
-        <option value="" selected disabled hidden>Select</option>
-        <option *ngFor="let driver of driversList">{{driver.driverId}}</option>
-      </select>
-    </form>
+    <div>
+      <form name="circuitForm">
+        <label>Select driver</label><br>
+        <select (change)="selectChangeHandler($event);">
+          <option value="" selected disabled hidden>Select</option>
+          <option *ngFor="let driver of driversList">{{driver.driverId}}</option>
+        </select>
+      </form>
+    </div>
+
+    <ng-container  *ngIf="!loading">
+      <label><i class="fas fa-portrait"></i> {{driver.givenName}} {{driver.familyName}}</label><br/>
+      <label><i class="far fa-calendar-alt"></i> {{driver.dateOfBirth}}</label><br/>
+      <label><i class="fas fa-flag"></i> {{driver.nationality}}<br/></label>
+
+      <app-podium [data]=podium></app-podium>
+
+      <h4>World Championship</h4>
+      <li *ngFor="let champ of championship">
+        {{champ.season}}
+      </li>
+
+      <h4>Stagioni disputate</h4>
+      <li *ngFor="let year of seasons">
+        {{year.season}}
+      </li>
+    </ng-container>
+
   </div>
-
-  <ng-container  *ngIf="!loading">
-    {{driver.givenName}}
-    {{driver.familyName}}
-    {{driver.dateOfBirth}}
-    {{driver.nationality}}
-
-    <li *ngFor="let pos of podium">
-      {{pos}}
-    </li>
-
-    <h4>World Championship</h4>
-    <li *ngFor="let champ of championship">
-      {{champ.season}}
-    </li>
-
-    <h4>Stagioni disputate</h4>
-    <li *ngFor="let year of seasons">
-      {{year.season}}
-    </li>
-  </ng-container>
-
 </div>

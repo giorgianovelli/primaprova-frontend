@@ -6,6 +6,10 @@ import {FooterComponent} from './footer/footer.component';
 import {MatButtonModule, MatSidenavModule, MatTableModule, MatToolbarModule} from '@angular/material';
 import {RouterModule} from '@angular/router';
 import {TableComponent} from './table/table.component';
+import {CdkTableModule} from '@angular/cdk/table';
+import { ChartsModule } from 'ng2-charts';
+import { PodiumComponent } from './podium/podium.component';
+import { StaticPodiumComponent } from './static-podium/static-podium.component';
 
 
 @NgModule({
@@ -13,13 +17,17 @@ import {TableComponent} from './table/table.component';
     LivebarComponent,
     HeaderComponent,
     FooterComponent,
-    TableComponent
+    TableComponent,
+    PodiumComponent,
+    StaticPodiumComponent
   ],
   exports: [
     LivebarComponent,
     HeaderComponent,
     FooterComponent,
-    TableComponent
+    TableComponent,
+    PodiumComponent,
+    StaticPodiumComponent
   ],
   imports: [
     RouterModule,
@@ -27,6 +35,8 @@ import {TableComponent} from './table/table.component';
     MatButtonModule,
     MatSidenavModule,
     MatTableModule,
+    CdkTableModule,
+    ChartsModule,
     CommonModule
   ]
 })

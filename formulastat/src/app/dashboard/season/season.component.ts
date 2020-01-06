@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {FormulastatService} from '../../api/formulastat.service';
-import {finalize, map, tap} from 'rxjs/operators';
+import {finalize, map, switchMap, tap} from 'rxjs/operators';
 
 import {Season} from '../../dto/season';
 import {Driver} from '../../dto/driver';
 import {Constructor} from '../../dto/constructor';
-import {merge, Observable} from 'rxjs';
+import {from, merge, Observable} from 'rxjs';
 import {Race} from '../../dto/race';
+import {Qualiresults} from '../../dto/qualiresults';
+import {Qualifying} from '../../dto/qualifying';
+import {Winmap} from '../../dto/winmap';
 
 @Component({
   selector: 'app-season',
@@ -20,6 +23,9 @@ export class SeasonComponent implements OnInit {
   races: Race[] = [];
   racesLength: number;
   loading = true;
+  qualiResults: Qualiresults[] = [];
+  qualifying: Driver[] = [];
+  poleTab: Winmap[] = [];
   constructor(private formulaService: FormulastatService) { }
 
   ngOnInit() {
@@ -33,13 +39,21 @@ export class SeasonComponent implements OnInit {
    */
   refresh(year: string) {
     this.loading = true;
+    this.qualiResults = [];
+    this.qualifying = [];
+    this.poleTab = [];
     merge(
       this.refreshYearChamp(year),
       this.refreshYearConstructor(year),
-      this.refreshNumberOfRace(year)
+      this.refreshNumberOfRace(year),
+      this.refreshPolePosition(year)
     ).pipe(
-      finalize(() => this.loading = false)
+      finalize(() => this.finalizeCall())
     ).subscribe();
+  }
+  finalizeCall() {
+    this.getPoleman();
+    this.loading = false;
   }
   /**
    * handle event from select list
@@ -56,7 +70,7 @@ export class SeasonComponent implements OnInit {
   refreshSeasons(): Observable<Season> {
     return this.formulaService.getSeasons()
       .pipe(
-        tap(console.log),
+        // tap(console.log),
         map(res => res['MRData']['SeasonTable']['Seasons']),
         tap(seasons => this.years = seasons)
       );
@@ -70,7 +84,7 @@ export class SeasonComponent implements OnInit {
   refreshYearChamp(year: string): Observable<Driver> {
     return this.formulaService.getYearChamp(year)
       .pipe(
-        tap(console.log),
+        // tap(console.log),
         map(d => d['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings'][0]['Driver']),
         tap(driver => this.champDriver = driver)
       );
@@ -84,7 +98,7 @@ export class SeasonComponent implements OnInit {
   refreshYearConstructor(year: string): Observable<Constructor> {
     return this.formulaService.getYearConstructor(year)
       .pipe(
-        tap(console.log),
+        // tap(console.log),
         map(c => c['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings'][0]['Constructor']),
         tap(constructor => this.champConstructor = constructor)
       );
@@ -98,10 +112,36 @@ export class SeasonComponent implements OnInit {
   refreshNumberOfRace(year: string): Observable<Race> {
     return this.formulaService.getNumberOfRace(year)
       .pipe(
-        tap(console.log),
+        // tap(console.log),
         map(r => r['MRData']['RaceTable']['Races']),
         tap(r => this.races = r),
         tap( _ => this.racesLength = this.races.length )
+      );
+  }
+
+  getPoleman() {
+    this.qualiResults
+      .forEach(result => result.QualifyingResults
+        .forEach(res => this.qualifying.push(res.Driver))
+      );
+    const mapAsc = new Map([...(
+      this.qualifying
+      .map(d => d.driverId)
+      .reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map()
+      )).entries()].sort((a, b) => b[1] - a[1]));
+    mapAsc.forEach((val, key) => {
+      this.poleTab.push({name: key, number: val});
+    });
+    console.log(this.poleTab);
+  }
+
+  refreshPolePosition(year: string) {
+    return this.formulaService.getPolePosition(year)
+      .pipe(
+        // tap(console.log),
+        switchMap(res => from(res['MRData']['RaceTable']['Races'])),
+        tap((r: Qualiresults) => this.qualiResults.push(r)),
+        // tap(console.log)
       );
   }
 
