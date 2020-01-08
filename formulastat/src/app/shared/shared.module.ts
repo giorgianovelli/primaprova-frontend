@@ -9,8 +9,6 @@ import {TableComponent} from './table/table.component';
 import {CdkTableModule} from '@angular/cdk/table';
 import { ChartsModule } from 'ng2-charts';
 import { PodiumComponent } from './podium/podium.component';
-import { StaticPodiumComponent } from './static-podium/static-podium.component';
-
 
 @NgModule({
   declarations: [
@@ -18,16 +16,14 @@ import { StaticPodiumComponent } from './static-podium/static-podium.component';
     HeaderComponent,
     FooterComponent,
     TableComponent,
-    PodiumComponent,
-    StaticPodiumComponent
+    PodiumComponent
   ],
   exports: [
     LivebarComponent,
     HeaderComponent,
     FooterComponent,
     TableComponent,
-    PodiumComponent,
-    StaticPodiumComponent
+    PodiumComponent
   ],
   imports: [
     RouterModule,

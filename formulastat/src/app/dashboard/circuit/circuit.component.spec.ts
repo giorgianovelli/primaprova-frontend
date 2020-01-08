@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CircuitComponent } from './circuit.component';
+import {generalConfiguration, generalDeclaration} from '../../../test';
 
 describe('CircuitComponent', () => {
   let component: CircuitComponent;
@@ -8,7 +9,8 @@ describe('CircuitComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CircuitComponent ]
+      imports: generalConfiguration,
+      declarations: generalDeclaration
     })
     .compileComponents();
   }));

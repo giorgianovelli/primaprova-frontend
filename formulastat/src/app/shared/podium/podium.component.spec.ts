@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PodiumComponent } from './podium.component';
+import {generalConfiguration, generalDeclaration} from '../../../test';
 
 describe('PodiumComponent', () => {
   let component: PodiumComponent;
@@ -8,7 +9,8 @@ describe('PodiumComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PodiumComponent ]
+      imports: generalConfiguration,
+      declarations: generalDeclaration
     })
     .compileComponents();
   }));

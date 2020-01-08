@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SeasonComponent } from './season.component';
+import {generalConfiguration, generalDeclaration} from '../../../test';
 
 describe('SeasonComponent', () => {
   let component: SeasonComponent;
@@ -8,7 +9,8 @@ describe('SeasonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeasonComponent ]
+      imports: generalConfiguration,
+      declarations: generalDeclaration
     })
     .compileComponents();
   }));

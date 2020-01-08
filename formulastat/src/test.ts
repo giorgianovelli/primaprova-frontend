@@ -6,14 +6,43 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import {SharedModule} from './app/shared/shared.module';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app/app.component';
+import {LayoutModule} from './app/layouts/layout.module';
+import {AppRoutingModule} from './app/app-routing.module';
+import {FormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DashboardModule} from './app/dashboard/dashboard.module';
 
 declare const require: any;
+
+export const generalDeclaration = [
+  AppComponent
+];
+
+export const generalConfiguration = [
+  RouterTestingModule,
+  SharedModule,
+  BrowserModule,
+  AppRoutingModule,
+  LayoutModule,
+  HttpClientModule,
+  FormsModule,
+  BrowserAnimationsModule,
+  DashboardModule
+];
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
+
+
+
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.

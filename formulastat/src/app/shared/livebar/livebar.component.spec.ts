@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LivebarComponent } from './livebar.component';
+import {generalConfiguration, generalDeclaration} from '../../../test';
 
 describe('LivebarComponent', () => {
   let component: LivebarComponent;
@@ -8,7 +9,8 @@ describe('LivebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LivebarComponent ]
+      imports: generalConfiguration,
+      declarations: generalDeclaration
     })
     .compileComponents();
   }));

@@ -3,7 +3,6 @@ import {FormulastatService} from '../../api/formulastat.service';
 import {finalize, map, tap} from 'rxjs/operators';
 import {Standing} from '../../dto/standing';
 import {Result} from '../../dto/result';
-import {Winmap} from '../../dto/winmap';
 import {merge} from 'rxjs';
 import {LiveStandingMap} from '../../dto/livestandingmap';
 

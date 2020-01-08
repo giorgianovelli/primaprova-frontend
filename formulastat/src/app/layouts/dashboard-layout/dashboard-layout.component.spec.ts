@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardLayoutComponent } from './dashboard-layout.component';
+import {generalConfiguration, generalDeclaration} from '../../../test';
 
 describe('DashboardLayoutComponent', () => {
   let component: DashboardLayoutComponent;
@@ -8,7 +9,8 @@ describe('DashboardLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardLayoutComponent ]
+      imports: generalConfiguration,
+      declarations: generalDeclaration
     })
     .compileComponents();
   }));
