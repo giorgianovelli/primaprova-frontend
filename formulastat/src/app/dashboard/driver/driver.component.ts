@@ -27,6 +27,10 @@ export class DriverComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * refresh search by selected driver
+   * @param driverId, selected driver {string}
+   */
   private refresh(driverId: string) {
     this.loading = true;
     merge(
@@ -41,10 +45,18 @@ export class DriverComponent implements OnInit {
 
   }
 
+  /**
+   * handle event from select list
+   * @param event - event change from select
+   */
   selectChangeHandler(event: any) {
     this.refresh(event.target.value);
   }
 
+  /**
+   * get list of drivers from service
+   * @returns - {Observable<any>}
+   */
   refreshDrivers() { // TODO lista solo di piloti correnti (tutti sono troppi: fare un filtro)
     return this.formulaService.getDrivers()
       .pipe(
@@ -53,6 +65,12 @@ export class DriverComponent implements OnInit {
         tap(d => this.driversList = d)
       );
   }
+
+  /**
+   * get info of selected driver from service
+   * @param driverId, {string}
+   * @returns - {Observable<any>}
+   */
   refreshDriverInfo(driverId: string) {
     return this.formulaService.getDriverInfo(driverId)
       .pipe(
@@ -61,6 +79,13 @@ export class DriverComponent implements OnInit {
         tap(d => this.driver = d)
       );
   }
+
+  /**
+   * restituisce il numero di risultati conseguiti dal pilota nella posizione specificata
+   * @param driverId, {string}
+   * @param position, {number}
+   * @returns - {Observable<any>}
+   */
   getPodium(driverId: string, position: number) {
     return this.formulaService.getPodiumResult(driverId, position)
       .pipe(
@@ -70,6 +95,12 @@ export class DriverComponent implements OnInit {
         tap(_ => this.podium[position - 1] = this.wins.length)
       );
   }
+
+  /**
+   * restituisce il numero di risultati conseguiti dal pilota nelle posizioni di podio
+   * @param driverId, {string}
+   * @returns - {Observable<ObservedValueOf<Observable<any>>>}
+   */
   refreshPodiumResult(driverId: string) {
     return concat(
       this.getPodium(driverId, 1),
@@ -77,6 +108,12 @@ export class DriverComponent implements OnInit {
       this.getPodium(driverId, 3)
     );
   }
+
+  /**
+   * get championship for selected driver
+   * @param driverId, {string}
+   * @returns - {Observable<any>}
+   */
   refreshWorldChampion(driverId: string) {
     return this.formulaService.getWorldChampion(driverId)
       .pipe(
@@ -86,6 +123,11 @@ export class DriverComponent implements OnInit {
       );
   }
 
+  /**
+   * restituisce le stagioni disputate dal pilota selezionato
+   * @param driverId, {string}
+   * @returns - {Observable<any>}
+   */
   refreshRacingSeasons(driverId: string) {
     return this.formulaService.getRacingSeasons(driverId)
       .pipe(

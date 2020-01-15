@@ -1,5 +1,6 @@
 mat-sidenav-container{
   height: 100%;
+  overflow: visible;
 }
 
 mat-sidenav{
@@ -17,3 +18,8 @@ mat-sidenav-content{
   padding: 25px;
   border-bottom: 25px;
 }
+
+.mat-drawer-content{
+  overflow: visible;
+}
+

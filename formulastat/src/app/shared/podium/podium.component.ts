@@ -38,8 +38,8 @@ export class PodiumComponent implements OnInit {
        hoverBackgroundColor: 'rgba(79,79,79,0.5)'
      }
     ];
-   console.log(this.data);
-   console.log(this.barChartData);
+   // console.log(this.data);
+   // console.log(this.barChartData);
   }
 
 }

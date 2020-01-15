@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {FormulastatService} from '../../api/formulastat.service';
 import {finalize, map, tap} from 'rxjs/operators';
 import {Standing} from '../../dto/standing';
@@ -13,6 +13,7 @@ import {LiveStandingMap} from '../../dto/livestandingmap';
 })
 export class LivebarComponent implements OnInit {
   driverStanding: Standing[] = [];
+  catchNgOnInit = new EventEmitter();
   podium: Result[] = [];
   livebarStanding: LiveStandingMap[] = [];
   loading = true;
@@ -25,18 +26,30 @@ export class LivebarComponent implements OnInit {
       this.getLastDriverStanding(),
       this.getLastSeasonPodium()
     ).pipe(
-      finalize(() => this.finalizeCircuitCall())
+      finalize(() => {
+        // this.catchNgOnInit.emit('ciao');
+        this.finalizeCircuitCall();
+      })
     ).subscribe();
   }
-  showLiveStanding() {
-    this.driverStanding.forEach(
-      driver => this.livebarStanding.push({driver: driver.Driver.driverId, points: driver.points}));
-    console.log(this.livebarStanding);
-  }
+
   finalizeCircuitCall() {
     this.showLiveStanding();
     this.loading = false;
   }
+
+  /**
+   * filtra classifica piloti
+   */
+  showLiveStanding() {
+    this.driverStanding.forEach(
+      driver => this.livebarStanding.push({driver: driver.Driver.driverId, points: driver.points}));
+    // console.log(this.livebarStanding);
+  }
+
+  /**
+   * restituisce la classifica piloti
+   */
   getLastDriverStanding() {
     return this.formulaService.getLastDriverStanding()
       .pipe(
@@ -46,6 +59,11 @@ export class LivebarComponent implements OnInit {
       );
 
   }
+
+  /**
+   * restituisce l'ultimo podio della stagione corrente
+   * @returns - {Observable<any>}
+   */
   getLastSeasonPodium() {
     return this.formulaService.getLastSeasonPodium()
       .pipe(

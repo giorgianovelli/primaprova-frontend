@@ -13,9 +13,10 @@ import {LayoutModule} from './app/layouts/layout.module';
 import {AppRoutingModule} from './app/app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DashboardModule} from './app/dashboard/dashboard.module';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 declare const require: any;
 
@@ -32,7 +33,8 @@ export const generalConfiguration = [
   HttpClientModule,
   FormsModule,
   BrowserAnimationsModule,
-  DashboardModule
+  DashboardModule,
+  HttpClientTestingModule
 ];
 
 // First, initialize the Angular testing environment.

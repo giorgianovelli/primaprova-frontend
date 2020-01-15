@@ -3,7 +3,7 @@
   <div>
     <form name="circuitForm">
       <label>Select circuit</label><br>
-      <select class="select-css" (change)="selectChangeHandler($event);">
+      <select class="selectCircuit" (change)="selectChangeHandler($event);">
         <option value="" selected disabled hidden>Select</option>
         <option *ngFor="let circuit of circuits">{{circuit.circuitId}}</option>
       </select>
